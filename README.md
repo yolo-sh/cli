@@ -8,7 +8,7 @@
 </p>
 
 <blockquote align="left">
-  ... you could use it to deploy your app, as a remote development environment or even as a Ngrok replacement. Honestly, it's up to you!
+  ... you could use it to deploy your app, as a remote development environment or even as a code sandbox. Honestly, it's up to you!
 </blockquote>
 
 ```bash
