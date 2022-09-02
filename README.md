@@ -17,12 +17,15 @@ yolo aws init yolo-sh/api --instance-type t2.medium
 <p align="center">
 <img width="759" alt="Example of use of the Yolo CLI" src="https://user-images.githubusercontent.com/1233275/188150604-cdc1bcf7-301b-4756-9c87-153282a39532.png">
 </p>
+<blockquote align="left">
+  ... now that the environment is created, you could connect your preferred editor using the <code>edit</code> command:
+</blockquote>
 
 ```bash
 yolo aws edit yolo-sh/api
 ```
 
-<img width="1136" alt="Opened VSCode in a go repository" src="https://user-images.githubusercontent.com/1233275/188151885-315d0818-7912-4819-833f-8846ef86b94c.png">
+<img width="1136" alt="VSCode opened in a go repository" src="https://user-images.githubusercontent.com/1233275/188153382-99f30e14-b0db-444f-a956-c3e4cc44109f.png">
 
 
 ## Table of contents
