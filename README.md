@@ -14,10 +14,16 @@
 ```bash
 yolo aws init yolo-sh/api --instance-type t2.medium
 ```
+<p align="center">
+<img width="759" alt="Example of use of the Yolo CLI" src="https://user-images.githubusercontent.com/1233275/188150604-cdc1bcf7-301b-4756-9c87-153282a39532.png">
+</p>
 
-https://user-images.githubusercontent.com/1233275/172346442-d6fef09c-2ef0-4633-8d72-e20bef8fc1a9.mp4
+```bash
+yolo aws edit yolo-sh/api
+```
 
-<img width="1136" alt="vscode" src="https://user-images.githubusercontent.com/1233275/172015213-0ba516b6-fe24-4bd4-8ad4-d876c6188f3c.png">
+<img width="1136" alt="Opened VSCode in a go repository" src="https://user-images.githubusercontent.com/1233275/188151885-315d0818-7912-4819-833f-8846ef86b94c.png">
+
 
 ## Table of contents
 - [Requirements](#requirements)
