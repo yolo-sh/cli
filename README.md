@@ -156,7 +156,7 @@ yolo aws edit yolo-sh/api
 ```bash
 yolo <cloud_provider> open-port <repository> <port>
 ```
-The `open-port` makes the specified port reachable from any IP address using the `TCP` protocol.
+The `open-port` command makes the specified port reachable from any IP address using the `TCP` protocol.
 
 #### Example
 
@@ -169,7 +169,7 @@ yolo aws open-port yolo-sh/api 8000
 ```bash
 yolo <cloud_provider> close-port <repository> <port>
 ```
-The `close-port` makes the specified port unreachable from all IP addresses.
+The `close-port` command makes the specified port unreachable from all IP addresses.
 
 #### Example
 
