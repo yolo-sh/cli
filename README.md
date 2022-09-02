@@ -515,7 +515,7 @@ Your repositories will be cloned in `/home/yolo/workspace`. A default timezone a
 
 #### > Why using Docker as a VM and not something like NixOS, for example?
 
-I'm aware that containers are not meant to be used as a VM like that but, at the time of writing, Docker is still the most widely used tool among developers to configure their environment (even if it may certainly change in the future).
+We're aware that containers are not meant to be used as a VM like that but, at the time of writing, Docker is still the most widely used tool among developers to configure their environment (even if it may certainly change in the future).
 
 #### > Given that my environment will run in a container does it mean that it will be limited?
 
