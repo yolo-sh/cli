@@ -1,14 +1,14 @@
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/1233275/172015327-7234ec48-fe57-4a7b-b48e-baf5e6d67aab.png" alt="yolo" width="180" height="180" />
+  <img src="https://user-images.githubusercontent.com/1233275/188123619-b37cd965-cdbf-4eb6-9218-fe81c136ed8a.jpeg" alt="yolo" width="180" height="180" />
 </p>
 
 <p align="center">
     <h1 align="center">Yolo</h1>
-    <p align="center">Live environments for any repository in any cloud provider.<br/> Currently available on <a href="https://github.com/yolo-sh/aws-cloud-provider">Amazon Web Services</a> and <a href="https://github.com/yolo-sh/hetzner-cloud-provider">Hetzner</a>.</p>
+    <p align="center">Live environments for any repository in any cloud provider. Currently available on <a href="https://github.com/yolo-sh/aws-cloud-provider">Amazon Web Services</a> and <a href="https://github.com/yolo-sh/hetzner-cloud-provider">Hetzner</a>.</p>
 </p>
 
 <blockquote align="left">
-  ... you could use it to deploy your app, as a remote development environment or maybe as a Ngrok replacement (with URLs that will not disapear when you close the lid of your laptop). Honestly, it's up to you!
+  ... you could use it to deploy your app, as a remote development environment or even as a Ngrok replacement. Honestly, it's up to you!
 </blockquote>
 
 ```bash
