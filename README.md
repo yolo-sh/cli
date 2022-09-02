@@ -4,7 +4,7 @@
 
 <p align="center">
     <h1 align="center">Yolo</h1>
-    <p align="center">Live environments for any repository in any cloud provider. Currently available on <a href="https://github.com/yolo-sh/aws-cloud-provider">Amazon Web Services</a> and <a href="https://github.com/yolo-sh/hetzner-cloud-provider">Hetzner</a>.</p>
+    <p align="center">Live environments for any repository. Running in your cloud provider account.<br />Currently available on <a href="https://github.com/yolo-sh/aws-cloud-provider">Amazon Web Services</a> and <a href="https://github.com/yolo-sh/hetzner-cloud-provider">Hetzner</a>.</p>
 </p>
 
 <blockquote align="left">
