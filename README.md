@@ -51,9 +51,11 @@ The Yolo binary has been tested on Linux and Mac. Support for Windows is theoret
 
 Before using Yolo, the following dependencies need to be installed:
 
-- [Visual Studio Code](https://code.visualstudio.com/) (currently the sole editor supported).
-
 - [OpenSSH Client](https://www.openssh.com/) (used to access your environments).
+
+Before running the `edit` command, one of the following editors need to be installed:
+
+- [Visual Studio Code](https://code.visualstudio.com/) (currently the sole editor supported).
 
 ## Installation
 
