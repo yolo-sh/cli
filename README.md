@@ -148,7 +148,7 @@ yolo hetzner init yolo-sh/api --instance-type cx11
 ### Edit
 
 ```bash
-yolo <cloud_provider> stop <repository>
+yolo <cloud_provider> edit <repository>
 ```
 The `edit` command connects your preferred editor to an environment.
 
