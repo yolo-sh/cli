@@ -1,11 +1,16 @@
 package cmd
 
 import (
+	"fmt"
 	"os"
+	"runtime"
+	"strings"
 
 	"github.com/spf13/cobra"
 	"github.com/yolo-sh/cli/internal/dependencies"
+	"github.com/yolo-sh/cli/internal/exceptions"
 	"github.com/yolo-sh/cli/internal/system"
+	"github.com/yolo-sh/cli/internal/vscode"
 	"github.com/yolo-sh/yolo/features"
 )
 
@@ -28,6 +33,34 @@ In this version of the Yolo CLI, only Visual Studio Code is supported.`,
 
 		yoloViewableErrorBuilder := dependencies.ProvideYoloViewableErrorBuilder()
 		baseView := dependencies.ProvideBaseView()
+
+		missingRequirements := []string{}
+		vscodeCLI := vscode.CLI{}
+		_, err := vscodeCLI.LookupPath(runtime.GOOS)
+
+		if vscodeCLINotFoundErr, ok := err.(vscode.ErrCLINotFound); ok {
+			missingRequirements = append(
+				missingRequirements,
+				fmt.Sprintf(
+					"Visual Studio Code (looked in \"%s)",
+					strings.Join(vscodeCLINotFoundErr.VisitedPaths, "\", \"")+"\"",
+				),
+			)
+		}
+
+		if len(missingRequirements) > 0 {
+			missingRequirementsErr := exceptions.ErrMissingRequirements{
+				MissingRequirements: missingRequirements,
+			}
+
+			baseView.ShowErrorViewWithStartingNewLine(
+				yoloViewableErrorBuilder.Build(
+					missingRequirementsErr,
+				),
+			)
+
+			os.Exit(1)
+		}
 
 		repository := args[0]
 		checkForRepositoryExistence := false
