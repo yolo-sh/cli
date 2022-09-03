@@ -5,8 +5,6 @@ import (
 	"io/fs"
 	"os"
 	"os/exec"
-	"runtime"
-	"strings"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -14,7 +12,6 @@ import (
 	"github.com/yolo-sh/cli/internal/dependencies"
 	"github.com/yolo-sh/cli/internal/exceptions"
 	"github.com/yolo-sh/cli/internal/system"
-	"github.com/yolo-sh/cli/internal/vscode"
 	"github.com/yolo-sh/yolo/github"
 )
 
@@ -67,21 +64,8 @@ func init() {
 func ensureYoloCLIRequirements() {
 	missingRequirements := []string{}
 
-	vscodeCLI := vscode.CLI{}
-	_, err := vscodeCLI.LookupPath(runtime.GOOS)
-
-	if vscodeCLINotFoundErr, ok := err.(vscode.ErrCLINotFound); ok {
-		missingRequirements = append(
-			missingRequirements,
-			fmt.Sprintf(
-				"Visual Studio Code (looked in \"%s)",
-				strings.Join(vscodeCLINotFoundErr.VisitedPaths, "\", \"")+"\"",
-			),
-		)
-	}
-
 	sshCommand := "ssh"
-	_, err = exec.LookPath(sshCommand)
+	_, err := exec.LookPath(sshCommand)
 
 	if err != nil {
 		missingRequirements = append(
