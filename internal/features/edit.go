@@ -74,7 +74,7 @@ func (e EditOutputHandler) HandleOutput(output features.EditOutput) error {
 
 	_, err = e.vscodeProcess.OpenOnRemote(
 		sshConfigHostKey,
-		constants.WorkspaceDirPath,
+		constants.VSCodeWorkspaceConfigFilePath,
 	)
 
 	if err != nil {
