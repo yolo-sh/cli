@@ -41,7 +41,7 @@ From there, the most common workflow is:
 
 	TraverseChildren: true,
 
-	Version: "v0.0.6",
+	Version: "v0.0.7",
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
