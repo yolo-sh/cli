@@ -220,7 +220,7 @@ yolo aws uninstall
 
 ## Environments configuration
 
-All environments are run in Docker containers built from the `ghcr.io/yolo-sh/workspace-full:latest` image. You could see the source of this image in the [yolo-sh/workspace-full](https://github.com/yolo-sh/workspace-full) repository.
+All environments are run in Docker containers built from the `ghcr.io/yolo-sh/workspace-full` image. You could see the source of this image in the [yolo-sh/workspace-full](https://github.com/yolo-sh/workspace-full) repository.
 
 In summary, Yolo is built on `ubuntu 22.04` with most popular runtimes pre-installed. An user `yolo` is created and configured to be used as the default user. Root privileges are managed via `sudo`.
 
