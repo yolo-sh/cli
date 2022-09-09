@@ -18,7 +18,7 @@ yolo aws init yolo-sh/api --instance-type t2.medium
 <img width="759" alt="Example of use of the Yolo CLI" src="https://user-images.githubusercontent.com/1233275/188150604-cdc1bcf7-301b-4756-9c87-153282a39532.png">
 </p>
 <blockquote align="left">
-  ... now that the environment is created, you could connect your preferred editor using the <code>edit</code> command:
+  ... now that the environment is created, you can connect to it with your preferred editor using the <code>edit</code> command:
 </blockquote>
 
 ```bash
@@ -129,11 +129,11 @@ The source code that implements the GitHub OAuth flow is located in the [yolo-sh
 ### Init
 
 ```bash
-yolo <cloud_provider> start <repository>
+yolo <cloud_provider> init <repository> [--instance-type=<instance_type>]
 ```
 The `init` command initializes an environment for a specific GitHub repository.
 
-An `--instance-type` flag could be passed to specify the instance type that will power your environment. (*See the corresponding cloud provider repository for default / valid values*).
+An `--instance-type` flag can be passed to specify the instance type that will power your environment. (*See the corresponding cloud provider repository for default / valid values*).
 
 #### Examples
 
@@ -151,8 +151,6 @@ yolo hetzner init yolo-sh/api --instance-type cx11
 yolo <cloud_provider> edit <repository>
 ```
 The `edit` command connects your preferred editor to an environment.
-
-Currently, the sole editor supported is **Visual Studio Code**. 
 
 #### Example
 
