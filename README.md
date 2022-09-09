@@ -18,7 +18,7 @@ yolo aws init yolo-sh/api --instance-type t2.medium
 <img width="759" alt="Example of use of the Yolo CLI" src="https://user-images.githubusercontent.com/1233275/188150604-cdc1bcf7-301b-4756-9c87-153282a39532.png">
 </p>
 <blockquote align="left">
-  ... now that the environment is created, you can connect to it with your preferred editor using the <code>edit</code> command:
+  ... now that this environment is created, you can connect to it with your preferred editor using the <code>edit</code> command:
 </blockquote>
 
 ```bash
