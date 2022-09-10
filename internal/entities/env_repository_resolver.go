@@ -55,6 +55,8 @@ func (e EnvRepositoryResolver) Resolve(
 		}
 	}
 
+	languagesUsed := []string{}
+
 	if checkForRepositoryExistence {
 		repoExists, err := e.github.DoesRepositoryExist(
 			githubAccessToken,
@@ -72,6 +74,16 @@ func (e EnvRepositoryResolver) Resolve(
 				RepoOwner: parsedRepoName.Owner,
 				RepoName:  parsedRepoName.Name,
 			}
+		}
+
+		languagesUsed, err = e.github.GetLanguagesUsedInRepository(
+			githubAccessToken,
+			parsedRepoName.Owner,
+			parsedRepoName.Name,
+		)
+
+		if err != nil {
+			return nil, err
 		}
 	}
 
@@ -120,5 +132,7 @@ func (e EnvRepositoryResolver) Resolve(
 			parsedRepoName.Owner,
 			parsedRepoName.Name,
 		),
+
+		LanguagesUsed: languagesUsed,
 	}, nil
 }
