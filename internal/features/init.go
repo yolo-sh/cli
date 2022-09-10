@@ -213,8 +213,9 @@ func (i InitOutputHandler) HandleOutput(output features.InitOutput) error {
 
 		err = agentClient.BuildAndStartEnv(
 			&proto.BuildAndStartEnvRequest{
-				EnvRepoOwner: resolvedRepository.Owner,
-				EnvRepoName:  resolvedRepository.Name,
+				EnvRepoOwner:         resolvedRepository.Owner,
+				EnvRepoName:          resolvedRepository.Name,
+				EnvRepoLanguagesUsed: resolvedRepository.LanguagesUsed,
 			},
 			func(stream agent.BuildAndStartEnvStream) error {
 				for {

@@ -11,6 +11,7 @@ type GitHubManager interface {
 	CreateRepository(accessToken string, organization string, properties *github.Repository) (*github.Repository, error)
 	DoesRepositoryExist(accessToken, repositoryOwner, repositoryName string) (bool, error)
 	GetFileContentFromRepository(accessToken, repositoryOwner, repositoryName, filePath string) (string, error)
+	GetLanguagesUsedInRepository(accessToken, repositoryOwner, repositoryName string) ([]string, error)
 
 	CreateSSHKey(accessToken string, keyPairName string, publicKeyContent string) (*github.Key, error)
 	RemoveSSHKey(accessToken string, sshKeyID int64) error
