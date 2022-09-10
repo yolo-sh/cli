@@ -40,6 +40,26 @@ If you don't plan to use this environment again, you could remove it using the c
 
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 		globals.CurrentCloudProvider = globals.AWSCloudProvider
+
+		// aws command ran without subcommand -> help displayed -> no args to parse
+		if !cmd.HasParent() {
+			return
+		}
+
+		profileFlagIsSet := cmd.Parent().Flags().Lookup("profile").Changed
+		regionFlagIsSet := cmd.Parent().Flags().Lookup("region").Changed
+
+		if profileFlagIsSet {
+			globals.CurrentCloudProviderArgs += "--profile " + awsProfile
+		}
+
+		if regionFlagIsSet {
+			if len(globals.CurrentCloudProviderArgs) > 0 {
+				globals.CurrentCloudProviderArgs += " "
+			}
+
+			globals.CurrentCloudProviderArgs += "--region " + awsRegion
+		}
 	},
 }
 

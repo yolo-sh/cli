@@ -36,6 +36,26 @@ If you don't plan to use this environment again, you could remove it using the c
 
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 		globals.CurrentCloudProvider = globals.HetznerCloudProvider
+
+		// hetzner command ran without subcommand -> help displayed -> no args to parse
+		if !cmd.HasParent() {
+			return
+		}
+
+		contextFlagIsSet := cmd.Parent().Flags().Lookup("context").Changed
+		regionFlagIsSet := cmd.Parent().Flags().Lookup("region").Changed
+
+		if contextFlagIsSet {
+			globals.CurrentCloudProviderArgs += "--context " + hetznerContext
+		}
+
+		if regionFlagIsSet {
+			if len(globals.CurrentCloudProviderArgs) > 0 {
+				globals.CurrentCloudProviderArgs += " "
+			}
+
+			globals.CurrentCloudProviderArgs += "--region " + hetznerRegion
+		}
 	},
 }
 
