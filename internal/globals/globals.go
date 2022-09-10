@@ -8,5 +8,6 @@ const (
 )
 
 var (
-	CurrentCloudProvider CloudProvider
+	CurrentCloudProvider     CloudProvider
+	CurrentCloudProviderArgs string
 )

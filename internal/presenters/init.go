@@ -54,7 +54,12 @@ func (i InitPresenter) PresentToView(response features.InitResponse) {
 			viewDataMessage = "The environment for \"" + envName + "\" is already initialized."
 		}
 
-		currentCloudProvider := string(globals.CurrentCloudProvider)
+		currentCloudProviderCmd := string(globals.CurrentCloudProvider)
+		currentCloudProviderCmdArgs := globals.CurrentCloudProviderArgs
+
+		if len(currentCloudProviderCmdArgs) > 0 {
+			currentCloudProviderCmd += " " + currentCloudProviderCmdArgs
+		}
 
 		viewDataSubtext := fmt.Sprintf(
 			"The public IP of your environment is: %s\n\n"+
@@ -64,9 +69,9 @@ func (i InitPresenter) PresentToView(response features.InitResponse) {
 				"To open a port: `%s`\n\n"+
 				"Installed runtimes: %s",
 			bold(response.Content.EnvPublicIPAddress),
-			bold(constants.Blue("yolo "+currentCloudProvider+" edit "+envName)),
+			bold(constants.Blue("yolo "+currentCloudProviderCmd+" edit "+envName)),
 			bold(constants.Blue("ssh "+envName)),
-			bold(constants.Blue("yolo "+currentCloudProvider+" open-port "+envName+" <port>")),
+			bold(constants.Blue("yolo "+currentCloudProviderCmd+" open-port "+envName+" <port>")),
 			bold(constants.White(
 				constants.BGBlue(" docker (latest) ")+" ",
 				constants.BGBlue(" docker compose (latest) ")+" ",
