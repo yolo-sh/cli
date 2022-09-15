@@ -119,14 +119,86 @@ func (i InitOutputHandler) HandleOutput(output features.InitOutput) error {
 			),
 		)
 
-		err := agentClient.InitInstance(&proto.InitInstanceRequest{
-			EnvNameSlug:     env.GetNameSlug(),
-			GithubUserEmail: i.userConfig.GetString(config.UserConfigKeyGitHubEmail),
-			UserFullName:    i.userConfig.GetString(config.UserConfigKeyGitHubFullName),
-		}, func(stream agent.InitInstanceStream) error {
+		err := agentClient.InitInstance(
+			&proto.InitInstanceRequest{},
+			func(stream agent.InitInstanceStream) error {
+
+				for {
+					_, err := stream.Recv()
+
+					if err == io.EOF {
+						break
+					}
+
+					if err != nil {
+						return err
+					}
+				}
+
+				return nil
+			},
+		)
+
+		if err != nil {
+			return handleError(err)
+		}
+
+		resolvedRepository := env.ResolvedRepository
+
+		err = agentClient.BuildAndStartEnv(
+			&proto.BuildAndStartEnvRequest{
+				EnvNameSlug:          env.GetNameSlug(),
+				EnvRepoOwner:         resolvedRepository.Owner,
+				EnvRepoName:          resolvedRepository.Name,
+				EnvRepoLanguagesUsed: resolvedRepository.LanguagesUsed,
+			},
+			func(stream agent.BuildAndStartEnvStream) error {
+				for {
+					reply, err := stream.Recv()
+
+					if err == io.EOF {
+						break
+					}
+
+					if err != nil {
+						return err
+					}
+
+					stepper.StopCurrentStep()
+
+					if len(reply.LogLineHeader) > 0 {
+						bold := cliConstants.Bold
+						blue := cliConstants.Blue
+						i.logger.Log(bold(blue("> " + reply.LogLineHeader + "\n")))
+					}
+
+					if len(reply.LogLine) > 0 {
+						i.logger.LogNoNewline(reply.LogLine)
+					}
+				}
+
+				return nil
+			},
+		)
+
+		if err != nil {
+			return handleError(err)
+		}
+
+		stepper.StartTemporaryStep(
+			"Initializing the environment",
+		)
+
+		err = agentClient.InitEnv(&proto.InitEnvRequest{
+			EnvRepoOwner:         resolvedRepository.Owner,
+			EnvRepoName:          resolvedRepository.Name,
+			EnvRepoLanguagesUsed: resolvedRepository.LanguagesUsed,
+			GithubUserEmail:      i.userConfig.GetString(config.UserConfigKeyGitHubEmail),
+			UserFullName:         i.userConfig.GetString(config.UserConfigKeyGitHubFullName),
+		}, func(stream agent.InitEnvStream) error {
 
 			for {
-				initInstanceReply, err := stream.Recv()
+				reply, err := stream.Recv()
 
 				if err == io.EOF {
 					break
@@ -136,13 +208,13 @@ func (i InitOutputHandler) HandleOutput(output features.InitOutput) error {
 					return err
 				}
 
-				if initInstanceReply.GithubSshPublicKeyContent != nil &&
+				if reply.GithubSshPublicKeyContent != nil &&
 					envAdditionalProperties.GitHubCreatedSSHKeyId == nil {
 
 					sshKeyInGitHub, err := i.github.CreateSSHKey(
 						i.userConfig.GetString(config.UserConfigKeyGitHubAccessToken),
 						fmt.Sprintf("yolo-%s", env.GetNameSlug()),
-						initInstanceReply.GetGithubSshPublicKeyContent(),
+						reply.GetGithubSshPublicKeyContent(),
 					)
 
 					if err != nil {
@@ -169,12 +241,12 @@ func (i InitOutputHandler) HandleOutput(output features.InitOutput) error {
 					}
 				}
 
-				if initInstanceReply.GithubGpgPublicKeyContent != nil &&
+				if reply.GithubGpgPublicKeyContent != nil &&
 					envAdditionalProperties.GitHubCreatedGPGKeyId == nil {
 
 					gpgKeyInGitHub, err := i.github.CreateGPGKey(
 						i.userConfig.GetString(config.UserConfigKeyGitHubAccessToken),
-						initInstanceReply.GetGithubGpgPublicKeyContent(),
+						reply.GetGithubGpgPublicKeyContent(),
 					)
 
 					if err != nil {
@@ -204,50 +276,6 @@ func (i InitOutputHandler) HandleOutput(output features.InitOutput) error {
 
 			return nil
 		})
-
-		if err != nil {
-			return handleError(err)
-		}
-
-		resolvedRepository := env.ResolvedRepository
-
-		err = agentClient.BuildAndStartEnv(
-			&proto.BuildAndStartEnvRequest{
-				EnvRepoOwner:         resolvedRepository.Owner,
-				EnvRepoName:          resolvedRepository.Name,
-				EnvRepoLanguagesUsed: resolvedRepository.LanguagesUsed,
-			},
-			func(stream agent.BuildAndStartEnvStream) error {
-				for {
-					startEnvReply, err := stream.Recv()
-
-					if err == io.EOF {
-						break
-					}
-
-					if err != nil {
-						return err
-					}
-
-					stepper.StopCurrentStep()
-
-					if len(startEnvReply.LogLineHeader) > 0 {
-						bold := cliConstants.Bold
-						blue := cliConstants.Blue
-						i.logger.Log(bold(blue("> " + startEnvReply.LogLineHeader + "\n")))
-					}
-
-					if len(startEnvReply.LogLine) > 0 {
-						i.logger.LogNoNewline(startEnvReply.LogLine)
-					}
-				}
-
-				// Add a new empty line to separate logs from success message
-				i.logger.Log("")
-
-				return nil
-			},
-		)
 
 		if err != nil {
 			return handleError(err)

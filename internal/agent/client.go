@@ -17,6 +17,11 @@ type ClientInterface interface {
 		startEnvRequest *proto.BuildAndStartEnvRequest,
 		streamHandler func(stream BuildAndStartEnvStream) error,
 	) error
+
+	InitEnv(
+		initEnvRequest *proto.InitEnvRequest,
+		streamHandler func(stream InitEnvStream) error,
+	) error
 }
 
 type ClientConfig struct {

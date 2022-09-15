@@ -1,7 +1,7 @@
 package features
 
 import (
-	"github.com/yolo-sh/agent/constants"
+	"github.com/yolo-sh/agent-container/constants"
 	"github.com/yolo-sh/cli/internal/interfaces"
 	"github.com/yolo-sh/yolo/features"
 )
