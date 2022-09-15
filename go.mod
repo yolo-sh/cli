@@ -10,6 +10,8 @@ replace github.com/yolo-sh/yolo v0.0.0 => ../yolo
 
 replace github.com/yolo-sh/agent v0.0.0 => ../agent
 
+replace github.com/yolo-sh/agent-container v0.0.0 => ../agent-container
+
 require (
 	github.com/aws/aws-sdk-go-v2/config v1.13.1
 	github.com/briandowns/spinner v1.18.1
@@ -22,12 +24,13 @@ require (
 	github.com/spf13/cobra v1.3.0
 	github.com/spf13/viper v1.10.1
 	github.com/yolo-sh/agent v0.0.0
+	github.com/yolo-sh/agent-container v0.0.0
 	github.com/yolo-sh/aws-cloud-provider v0.0.0
 	github.com/yolo-sh/hetzner-cloud-provider v0.0.0
 	github.com/yolo-sh/yolo v0.0.0
 	golang.org/x/crypto v0.0.0-20220313003712-b769efc7c000
 	golang.org/x/oauth2 v0.0.0-20220411215720-9780585627b5
-	google.golang.org/grpc v1.46.2
+	google.golang.org/grpc v1.49.0
 )
 
 require (
@@ -74,7 +77,7 @@ require (
 	github.com/prometheus/client_golang v1.11.0 // indirect
 	github.com/prometheus/client_model v0.2.0 // indirect
 	github.com/prometheus/common v0.26.0 // indirect
-	github.com/prometheus/procfs v0.6.0 // indirect
+	github.com/prometheus/procfs v0.8.0 // indirect
 	github.com/spf13/afero v1.6.0 // indirect
 	github.com/spf13/cast v1.4.1 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
@@ -87,7 +90,7 @@ require (
 	golang.org/x/text v0.3.7 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/genproto v0.0.0-20220519153652-3a47de7e79bd // indirect
-	google.golang.org/protobuf v1.28.0 // indirect
+	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/check.v1 v1.0.0-20200227125254-8fa46927fb4f // indirect
 	gopkg.in/ini.v1 v1.66.2 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
