@@ -224,7 +224,7 @@ In summary, Yolo is built on `ubuntu 22.04` with `systemd` and most popular runt
 
 Your repositories will be cloned in `/home/yolo/workspace`.
 
-Yolo uses the the [sysbox runtime](https://github.com/nestybox/sysbox) to improve isolation and to enable containers to run the same workloads than VMs.
+Yolo uses the [sysbox runtime](https://github.com/nestybox/sysbox) to improve isolation and to enable containers to run the same workloads than VMs.
 
 ### Runtimes
 
