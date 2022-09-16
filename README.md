@@ -45,7 +45,7 @@ yolo aws edit yolo-sh/api
 
 ## Requirements
 
-The Yolo binary has been tested on Linux and Mac. Support for Windows is theoretical ([testers needed](https://github.com/yolo-sh/cli/issues/1) 💙).
+The Yolo binary has been tested on Linux and MacOS. Support for Windows is theoretical ([testers needed](https://github.com/yolo-sh/cli/issues/1) 💙).
 
 Before using Yolo, the following dependencies need to be installed:
 
