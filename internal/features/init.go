@@ -153,6 +153,8 @@ func (i InitOutputHandler) HandleOutput(output features.InitOutput) error {
 				EnvRepoLanguagesUsed: resolvedRepository.LanguagesUsed,
 			},
 			func(stream agent.BuildAndStartEnvStream) error {
+				displayNewlineIfError := false
+
 				for {
 					reply, err := stream.Recv()
 
@@ -161,6 +163,10 @@ func (i InitOutputHandler) HandleOutput(output features.InitOutput) error {
 					}
 
 					if err != nil {
+						if displayNewlineIfError {
+							i.logger.Log("")
+						}
+
 						return err
 					}
 
@@ -173,7 +179,17 @@ func (i InitOutputHandler) HandleOutput(output features.InitOutput) error {
 					}
 
 					if len(reply.LogLine) > 0 {
+						displayNewlineIfError = true
+
 						i.logger.LogNoNewline(reply.LogLine)
+					}
+
+					if reply.WaitingForContainerAgent {
+						displayNewlineIfError = false
+
+						stepper.StartTemporaryStep(
+							"Initializing the environment",
+						)
 					}
 				}
 
@@ -184,10 +200,6 @@ func (i InitOutputHandler) HandleOutput(output features.InitOutput) error {
 		if err != nil {
 			return handleError(err)
 		}
-
-		stepper.StartTemporaryStep(
-			"Initializing the environment",
-		)
 
 		err = agentClient.InitEnv(&proto.InitEnvRequest{
 			EnvRepoOwner:         resolvedRepository.Owner,
