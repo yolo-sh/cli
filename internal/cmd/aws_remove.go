@@ -61,7 +61,7 @@ There is no going back, so please be sure before running this command.`,
 				return system.AskForConfirmation(
 					logger,
 					os.Stdin,
-					"All your un-pushed edits will be lost.",
+					"All your un-pushed work will be lost.",
 				)
 			},
 		}
