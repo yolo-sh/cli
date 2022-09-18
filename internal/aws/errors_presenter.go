@@ -72,19 +72,14 @@ func (a AWSViewableErrorBuilder) Build(err error) (viewableError *presenters.Vie
 		return
 	}
 
-	if errors.Is(err, userconfig.ErrMissingRegionInEnv) {
+	if errors.Is(err, userconfig.ErrMissingRegionInEnv) ||
+		errors.Is(err, userconfig.ErrMissingRegionInFiles) {
+
 		viewableError.Title = "Missing region"
 		viewableError.Message = fmt.Sprintf(
 			"A region needs to be specified by setting the \"%s\" environment variable or by using the \"--region\" flag.",
 			userconfig.AWSRegionEnvVar,
 		)
-
-		return
-	}
-
-	if errors.Is(err, userconfig.ErrMissingRegionInFiles) {
-		viewableError.Title = "Missing region"
-		viewableError.Message = "A region needs to be specified by using the \"--region\" flag."
 
 		return
 	}
