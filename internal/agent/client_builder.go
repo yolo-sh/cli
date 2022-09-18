@@ -4,7 +4,6 @@ import (
 	"net"
 
 	"github.com/yolo-sh/agent/constants"
-	"github.com/yolo-sh/yolo/entities"
 )
 
 type ClientBuilder interface {
@@ -27,7 +26,7 @@ func NewDefaultClientConfig(
 ) ClientConfig {
 
 	return ClientConfig{
-		ServerRootUser:           entities.EnvRootUser,
+		ServerRootUser:           constants.YoloUserName,
 		ServerSSHPrivateKeyBytes: sshPrivateKeyBytes,
 		ServerAddr: net.JoinHostPort(
 			instancePublicIPAddress,
