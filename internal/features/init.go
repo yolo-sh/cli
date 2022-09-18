@@ -14,7 +14,6 @@ import (
 	cliEntities "github.com/yolo-sh/cli/internal/entities"
 	"github.com/yolo-sh/cli/internal/interfaces"
 	"github.com/yolo-sh/yolo/actions"
-	"github.com/yolo-sh/yolo/entities"
 	"github.com/yolo-sh/yolo/features"
 )
 
@@ -331,7 +330,7 @@ func (i InitOutputHandler) HandleOutput(output features.InitOutput) error {
 		sshConfigHostKey,
 		env.InstancePublicIPAddress,
 		sshPEMPath,
-		entities.EnvRootUser,
+		constants.YoloUserName,
 		sshServerListenPort,
 	)
 
