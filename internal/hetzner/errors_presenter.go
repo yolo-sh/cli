@@ -51,19 +51,14 @@ func (h HetznerViewableErrorBuilder) Build(err error) (viewableError *presenters
 		return
 	}
 
-	if errors.Is(err, userconfig.ErrMissingRegionInEnv) {
+	if errors.Is(err, userconfig.ErrMissingRegionInEnv) ||
+		errors.Is(err, userconfig.ErrMissingRegion) {
+
 		viewableError.Title = "Missing region"
 		viewableError.Message = fmt.Sprintf(
 			"A region needs to be specified by setting the \"%s\" environment variable or by using the \"--region\" flag.",
 			userconfig.HetznerRegionEnvVar,
 		)
-
-		return
-	}
-
-	if errors.Is(err, userconfig.ErrMissingRegion) {
-		viewableError.Title = "Missing region"
-		viewableError.Message = "A region needs to be specified by using the \"--region\" flag."
 
 		return
 	}
